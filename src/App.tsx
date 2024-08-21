@@ -13,7 +13,7 @@ function App() {
     if (savedProducts !== null) {
       setProducts(JSON.parse(savedProducts));
     } else {
-      setProducts([]);
+      setProducts(productList);
     }
   }, []);
 
