@@ -49,12 +49,12 @@ function AddProduct({
 
   const handlesOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setUserData( (prev:any) => {
-      return {
-        ...prev,
-        [id]: value,
-      };
-    });
+
+    setUserData({
+      ...userData,
+      [id]: value,
+    })
+
     setError((prev) => {
       return { ...prev, [id]: "" };
     });

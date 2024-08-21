@@ -93,11 +93,13 @@ export default function EditProduct({
       bgColor={color}
       onClick={() => {
         if (selectColor.includes(color)) {
-          setSelectColor((pre) => pre.filter((col) => col != color));
+          setSelectColor((pre: any) =>
+            pre.filter((col: string) => col != color)
+          );
           return;
         }
 
-        setSelectColor((pre) => [...pre, color]);
+        setSelectColor((pre: any) => [...pre, color]);
       }}
     />
   ));
@@ -129,6 +131,7 @@ export default function EditProduct({
                 </div>
                 <div className="flex  space-y-2  items-baseline space-x-1 my-3">
                   <Button
+                  width="w-full"
                     name="Edit"
                     className="bg-indigo-500 hover:bg-indigo-700"
                     onClick={() => {
@@ -136,12 +139,14 @@ export default function EditProduct({
                       if (Object.values(errors).every((el) => el == "")) {
                         editHandlers(editProduct!.id);
                         setIsEditOpen(false);
+                        console.log()
                       } else {
                         setError(errors);
                       }
                     }}
                   />
                   <Button
+                  width="w-full"
                     name="Cancel"
                     className="bg-gray-400 hover:bg-gray-600"
                     onClick={() => cancelHandlers()}
