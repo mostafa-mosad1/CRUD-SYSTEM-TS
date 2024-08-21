@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { v4 as uuidv4 } from "uuid";
 import { productList } from './data/data';
@@ -9,6 +9,10 @@ import EditProduct from './Components/EditProduct/EditProduct';
 
 
 function App() {
+  useEffect(()=>{
+setProducts(JSON.parse(localStorage.getItem("ProductsApp")))
+  },[])
+
    //  <---------- STATE ---------->
    const [userData, setUserData] = useState<IuserData>({
     title: "",
@@ -66,6 +70,7 @@ function App() {
 
   const submitHandlers = () => {
     setProducts((pre) => [my_pro, ...pre]);
+    localStorage.setItem("ProductsApp",JSON.stringify([my_pro,...products]))
     defualtObject();
     console.log(my_pro);
   };
@@ -104,7 +109,7 @@ const editHandlers = (id:any) => {
         editHandlers={editHandlers}
         cancelHandlers={cancelHandlers}
       /> 
-       <div className=" m-auto">
+       <div className="container m-auto">
         <div className="grid mt-10 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  ">
           {allProducts}
         </div>
