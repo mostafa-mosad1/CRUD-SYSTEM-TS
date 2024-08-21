@@ -9,12 +9,7 @@ import Button from "../ui/Button/Button";
 import Msg from "../ui/Msg/Msg";
 import { VaildInput } from "../../VaildInput/VaildInput";
 
-// interface Ierrors {
-//   title: string;
-//   description: string;
-//   imageURL: string;
-//   price: string;
-// }
+
 
 interface Iprops {
   userData: IuserData;

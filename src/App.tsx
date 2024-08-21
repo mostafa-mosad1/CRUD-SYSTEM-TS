@@ -1,20 +1,24 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
 import { v4 as uuidv4 } from "uuid";
-import { productList } from './data/data';
-import { IproductList, IuserData } from './interface/interface';
-import BuildProduct from './Components/BuildProduct/BuildProduct';
-import AddProduct from './Components/AddProduct/AddProduct';
-import EditProduct from './Components/EditProduct/EditProduct';
-
+import { productList } from "./data/data";
+import { IproductList, IuserData } from "./interface/interface";
+import BuildProduct from "./Components/BuildProduct/BuildProduct";
+import AddProduct from "./Components/AddProduct/AddProduct";
+import EditProduct from "./Components/EditProduct/EditProduct";
 
 function App() {
-  useEffect(()=>{
-setProducts(JSON.parse(localStorage.getItem("ProductsApp")))
-  },[])
+  useEffect(() => {
+    const savedProducts = localStorage.getItem("ProductsApp");
+    if (savedProducts !== null) {
+      setProducts(JSON.parse(savedProducts));
+    } else {
+      setProducts([]);
+    }
+  }, []);
 
-   //  <---------- STATE ---------->
-   const [userData, setUserData] = useState<IuserData>({
+  //  <---------- STATE ---------->
+  const [userData, setUserData] = useState<IuserData>({
     title: "",
     description: "",
     imageURL: "",
@@ -70,23 +74,22 @@ setProducts(JSON.parse(localStorage.getItem("ProductsApp")))
 
   const submitHandlers = () => {
     setProducts((pre) => [my_pro, ...pre]);
-    localStorage.setItem("ProductsApp",JSON.stringify([my_pro,...products]))
+    localStorage.setItem("ProductsApp", JSON.stringify([my_pro, ...products]));
     defualtObject();
     console.log(my_pro);
   };
-const cancelHandlers = () => {
-  setIsEditOpen(false);
-  console.log("cancel");
-  defualtObject()
-}
-const editHandlers = (id:any) => {
-  console.log(products.length);
-  console.log(my_pro)
-  setProducts(products.filter((product) => product.id != id));
-  setProducts(pre => [my_pro,...pre]);
-  defualtObject()
-
-}
+  const cancelHandlers = () => {
+    setIsEditOpen(false);
+    console.log("cancel");
+    defualtObject();
+  };
+  const editHandlers = (id: any) => {
+    console.log(products.length);
+    console.log(my_pro);
+    setProducts(products.filter((product) => product.id != id));
+    setProducts((pre) => [my_pro, ...pre]);
+    defualtObject();
+  };
   return (
     <>
       <AddProduct
@@ -108,16 +111,16 @@ const editHandlers = (id:any) => {
         editProduct={editProduct}
         editHandlers={editHandlers}
         cancelHandlers={cancelHandlers}
-      /> 
-       <div className="container m-auto">
+      />
+      <div className="container m-auto">
         <div className="grid mt-10 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  ">
           {allProducts}
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
 
 // git remote add origin https://github.com/mostafa-mosad1/CRUD-System.git
