@@ -49,7 +49,7 @@ function AddProduct({
 
   const handlesOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setUserData( (prev:IuserData) => {
+    setUserData( (prev:any) => {
       return {
         ...prev,
         [id]: value,
@@ -96,7 +96,7 @@ function AddProduct({
       bgColor={color}
       onClick={() => {
         if (selectColor.includes(color)) {
-          setSelectColor((pre:any) => pre.filter((col) => col != color));
+          setSelectColor((pre:any) => pre.filter((col:string) => col != color));
           return;
         }
 
